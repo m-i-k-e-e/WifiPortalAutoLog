@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Wifi portal AutoLog</string>
-    <string name="options">Options</string>
     <string name="user_id">User id</string>
     <string name="password">Password</string>
     <string name="dialog_password">Please enter your password</string>
