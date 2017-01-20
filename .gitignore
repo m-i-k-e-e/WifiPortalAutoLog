@@ -1,20 +1,3 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Gist
- @m-i-k-e-e
- Unwatch 1
-  Star 0
- Fork 0 m-i-k-e-e/AutoLog
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs  Settings
-Branch: master Find file Copy pathAutoLog/.gitignore
-4de6816  5 hours ago
-@m-i-k-e-e m-i-k-e-e Initial commit
-1 contributor
-RawBlameHistory    
-41 lines (29 sloc)  465 Bytes
 # Built application files
 *.apk
 *.ap_
