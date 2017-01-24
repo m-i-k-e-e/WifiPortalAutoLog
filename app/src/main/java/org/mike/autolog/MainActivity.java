@@ -11,6 +11,7 @@ import android.support.v7.preference.PreferenceManager;
 import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private WebView web;
     private Network net;
     private CaptivePortal captivePortal;
+    private TextView textView;
     private static final String URL = "http://clients3.google.com/generate_204";
 
     @Override
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
             captivePortal = intent.getParcelableExtra(ConnectivityManager.EXTRA_CAPTIVE_PORTAL);
         }
         web = (WebView) findViewById(R.id.webView);
+        textView = (TextView) findViewById(R.id.info_view);
+        textView.setText(R.string.info_starting);
     }
 
     @Override
@@ -50,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onPageFinished(WebView view, String url) {
                     super.onPageFinished(view, url);
+                    textView.setText(R.string.info_portal_injecting);
                     view.evaluateJavascript("document.getElementById('user.username').value='"+ PreferenceManager.getDefaultSharedPreferences(MainActivity.this).getString("pref_user_id", "") +"';" +
                             "document.getElementById('user.password').value='"+ PreferenceManager.getDefaultSharedPreferences(MainActivity.this).getString("pref_password", "") +"';" +
                             "document.getElementById('aupAccepted').click();" +
@@ -69,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+                            textView.setText(R.string.info_no_portal);
                             captivePortal.reportCaptivePortalDismissed();
                         }
                     },
@@ -76,9 +82,13 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             if (error.networkResponse.statusCode == 302) {
+                                textView.setText(R.string.info_starting);
                                 web.getSettings().setJavaScriptEnabled(true);
                                 web.setWebViewClient(webClient);
                                 web.loadUrl(error.networkResponse.headers.get("Location"));
+                            } else {
+                                captivePortal.reportCaptivePortalDismissed();
+                                textView.setText(R.string.info_unknown_error);
                             }
                         }
                     });
