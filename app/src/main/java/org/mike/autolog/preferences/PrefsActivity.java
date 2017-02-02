@@ -1,7 +1,9 @@
-package org.mike.autolog;
+package org.mike.autolog.preferences;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import org.mike.autolog.R;
 
 public class PrefsActivity extends AppCompatActivity {
 

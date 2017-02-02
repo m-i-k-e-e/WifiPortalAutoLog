@@ -1,12 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
-
+    signingConfigs {
+        releaseSign {
+            keyAlias '--'
+            keyPassword '--'
+            storeFile file('--')
+            storePassword '--'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "org.mike.autolog"
-        minSdkVersion 23
+        minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -17,6 +24,7 @@ android {
             minifyEnabled true
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releaseSign
         }
     }
 }

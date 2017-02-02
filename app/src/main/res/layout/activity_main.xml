@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:visibility="invisible"
     tools:context="org.mike.autolog.MainActivity">
 
     <WebView
@@ -15,8 +16,17 @@
         android:visibility="gone" />
 
     <TextView
+        android:layout_weight="1"
+        android:gravity="center"
         android:id="@+id/info_view"
         android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        tools:text="Info Text" />
+
+    <TextView
+        android:gravity="right"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Schenaerts Michaël"
         tools:text="Info Text" />
 </LinearLayout>
