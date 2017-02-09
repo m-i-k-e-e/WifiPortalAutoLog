@@ -1,16 +1,15 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
+    <style name="AppTheme" parent="android:Theme.Material">
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:colorAccent">@color/accent</item>
     </style>
 
-    <style name="PrefTheme" parent="PreferenceThemeOverlay.v14.Material"/>
+    <style name="PrefTheme" parent="android:ThemeOverlay.Material" />
 
     <style name="preferencesTheme" parent="AppTheme">
-        <item name="preferenceTheme">@style/PrefTheme</item>
+        <item name="android:preferenceStyle">@style/PrefTheme</item>
     </style>
-
 
 </resources>

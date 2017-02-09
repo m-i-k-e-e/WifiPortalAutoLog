@@ -4,11 +4,8 @@
     <string name="password">Password</string>
     <string name="dialog_password">Please enter your password</string>
     <string name="dialog_user_id">Please enter your userId</string>
-    <string name="info_starting">Starting</string>
-    <string name="info_portal_found">Portal found</string>
-    <string name="info_portal_injecting">Injecting username and password</string>
-    <string name="info_no_portal">No portal found</string>
-    <string name="guest_long_unknown_error">Unknown error</string>
-    <string name="guest_long_already_connected">Already connected !</string>
+    <string name="info_connecting">Connecting</string>
     <string name="preferences_about">About</string>
+    <string name="copyright">Copyright Schenaerts Michaël</string>
+    <string name="unable_connect">Unable to connect</string>
 </resources>
