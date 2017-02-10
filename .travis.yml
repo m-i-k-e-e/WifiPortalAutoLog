@@ -3,12 +3,9 @@ android:
   components:
     - build-tools-25.0.2
     - android-25
-    - extra-android-m2repository
-    - extra-google-m2repository
-    - extra-android-support
-    - extra-google-google_play_services
   licenses:
     - 'android-sdk-license-.+'
+    - 'android-sdk-preview-license-.+'
 
 jdk:
     - oraclejdk8
