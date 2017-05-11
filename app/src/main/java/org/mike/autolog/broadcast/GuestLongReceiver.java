@@ -103,8 +103,10 @@ public class GuestLongReceiver extends BroadcastReceiver implements Response.Err
                 }
             };
 
+            //noinspection WebViewBestPracticeDisableJavaScript
             webView.getSettings().setJavaScriptEnabled(true);
             webView.setWebViewClient(webClient);
+            //noinspection WebViewBestPracticesCheckURLtoWhiteList
             webView.loadUrl(error.networkResponse.headers.get(LOCATION_HEADER));
         }
     }
