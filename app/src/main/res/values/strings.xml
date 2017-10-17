@@ -5,7 +5,6 @@
     <string name="dialog_password">Please enter your password</string>
     <string name="dialog_user_id">Please enter your userId</string>
     <string name="info_starting">Starting</string>
-    <string name="info_portal_found">Portal found</string>
     <string name="info_portal_injecting">Injecting username and password</string>
     <string name="info_no_portal">No portal found</string>
     <string name="info_unknown_error">Unknown error</string>

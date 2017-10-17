@@ -1,5 +1,6 @@
 package org.mike.autolog;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.CaptivePortal;
@@ -13,12 +14,14 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.mike.autolog.volley.NetworkRequest;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,11 +40,12 @@ public class MainActivity extends AppCompatActivity {
             net = intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK);
             captivePortal = intent.getParcelableExtra(ConnectivityManager.EXTRA_CAPTIVE_PORTAL);
         }
-        web = (WebView) findViewById(R.id.webView);
-        textView = (TextView) findViewById(R.id.info_view);
+        web = findViewById(R.id.webView);
+        textView = findViewById(R.id.info_view);
         textView.setText(R.string.info_starting);
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onStart() {
         super.onStart();
@@ -69,13 +73,20 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
+            web.getSettings().setJavaScriptEnabled(true);
+            web.setWebViewClient(webClient);
 
-            StringRequest checkConnectionRequest = new StringRequest(Request.Method.GET, URL,
-                    new Response.Listener<String>() {
+
+            NetworkRequest checkConnectionRequest = new NetworkRequest(Request.Method.GET, URL,
+                    new Response.Listener<NetworkResponse>() {
                         @Override
-                        public void onResponse(String response) {
-                            textView.setText(R.string.info_no_portal);
-                            captivePortal.reportCaptivePortalDismissed();
+                        public void onResponse(NetworkResponse response) {
+                            if (response.headers.containsKey("Location")) { //some portal returns 200 instead of 302
+                                web.loadUrl(response.headers.get("Location"));
+                            }else {
+                                textView.setText(R.string.info_no_portal);
+                                captivePortal.reportCaptivePortalDismissed();
+                            }
                         }
                     },
                     new Response.ErrorListener() {
@@ -83,8 +94,6 @@ public class MainActivity extends AppCompatActivity {
                         public void onErrorResponse(VolleyError error) {
                             if (error.networkResponse.statusCode == 302) {
                                 textView.setText(R.string.info_starting);
-                                web.getSettings().setJavaScriptEnabled(true);
-                                web.setWebViewClient(webClient);
                                 web.loadUrl(error.networkResponse.headers.get("Location"));
                             } else {
                                 captivePortal.reportCaptivePortalDismissed();
