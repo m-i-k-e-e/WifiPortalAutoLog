@@ -1,5 +1,7 @@
 # WifiPortalAutoLog
 Sample project to show how you can use intent-filter to auto connect on captive portal.
+## Usage ##
+
 
 ## How it works ##
 By adding the following lines to your activity, it will start when you click on the connection notification
